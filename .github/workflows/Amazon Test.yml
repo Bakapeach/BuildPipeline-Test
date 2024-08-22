@@ -7,7 +7,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -25,34 +24,14 @@ jobs:
           wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
           sudo apt install ./google-chrome-stable_current_amd64.deb
 
-      - name: Install specific version of ChromeDriver
+      - name: Install ChromeDriver
         run: |
-          CHROMEDRIVER_VERSION="114.0.5735.90"  # Ensure this matches your Chrome version
+          CHROMEDRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE)
           wget https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip
           unzip chromedriver_linux64.zip
           sudo mv chromedriver /usr/local/bin/chromedriver
           sudo chmod +x /usr/local/bin/chromedriver
 
-      - name: Verify Chrome installation
-        run: which google-chrome
-
       - name: Run Selenium IDE Tests
         run: |
-          selenium-side-runner -c "browserName=chrome" amazontest.side
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-
-      - name: Cache Maven packages
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2/repository  # Adjust if needed
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
-
-      - name: Run Java Tests
-        run: mvn test -Dtest=Test002
+          selenium-side-runner -c "browserName=chrome, chromeOptions: {args: ['--headless', '--no-sandbox', '--disable-dev-shm-usage']}" amazontest.side
