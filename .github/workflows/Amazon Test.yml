@@ -14,7 +14,11 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '20.17.0' 
+          node-version: '18' # Node.js auf Version 18 setzen
+
+      - name: Install dependencies
+        run: |
+          npm install -g selenium-side-runner # Globale Installation von selenium-side-runner
 
       - name: Install Chrome
         run: |
@@ -29,6 +33,11 @@ jobs:
           fi
           sudo ln -s /usr/local/bin/chromedriver /usr/bin/chromedriver
           export PATH=$PATH:/usr/bin/chromedriver
+
+      - name: Verify selenium-side-runner installation
+        run: |
+          echo "Verifying selenium-side-runner installation"
+          which selenium-side-runner # Prüft, ob selenium-side-runner installiert und im Pfad ist
 
       - name: Run Selenium IDE Tests
         run: |
