@@ -18,12 +18,14 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm install -g selenium-side-runner chromedriver
+          npm install -g selenium-side-runner
 
-      - name: Install Chrome
+      - name: Install Chrome and ChromeDriver
         run: |
           wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
           sudo apt install -y ./google-chrome-stable_current_amd64.deb
+          sudo ln -s /usr/bin/google-chrome /usr/local/bin/chromedriver
+          echo 'ChromeDriver installed and linked.'
 
       - name: Verify installations
         run: |
@@ -31,12 +33,5 @@ jobs:
           chromedriver --version
 
       - name: Run Selenium IDE Tests
-        env:
-          CHROME_BIN: D:/develop/chromeDriver
         run: |
-         
-          export PATH=$PATH:/usr/local/bin/chromedriver
-
-
-          selenium-side-runner -c "browserName=chrome, chromeOptions: {args: ['--headless', '--no-sandbox', '--disable-dev-shm-usage']}" amazontest.side
-
+          selenium-side-runner -c "browserName=chrome, chromeOptions: {binary: '/usr/bin/google-chrome', args: ['--headless', '--no-sandbox', '--disable-dev-shm-usage']}" amazontest.side
