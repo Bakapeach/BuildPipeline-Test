@@ -38,18 +38,3 @@ jobs:
       - name: Run tests  # Optionaler Schritt für Java-Tests
         run: mvn test -Dtest=Test002  # Füge diesen Schritt ein, wenn du Java-Tests ausführst
 
-**Änderungen:**
-
-* **Schritt für Test entfernt:** Der ursprüngliche `test002`-Schritt mit den WebDriver-Befehlen wurde entfernt.
-* **Neuer Schritt: Run WebDriver Test:** Ein neuer Schritt namens "Run WebDriver Test" wurde hinzugefügt.
-* **Separate Skript-Datei:** Dieser Schritt verwendet die Aktion `uses`, um eine separate Shell-Skript-Datei namens `test-script.sh` aufzurufen.
-* **Java-Tests (optional):** Ein optionaler Schritt namens "Run tests" wurde hinzugefügt, um Java-Tests mit `mvn test` auszuführen. Füge diesen Schritt ein, wenn du Java-Tests mit WebDriver hast.
-
-**Weiteres Vorgehen:**
-
-1. **Erstelle die Shell-Skript-Datei:** Erstelle eine neue Datei namens `test-script.sh` im `.github/workflows` Verzeichnis.
-2. **Füge WebDriver-Befehle in die Skript-Datei ein:** Füge die Befehle aus deinem ursprünglichen `test002`-Schritt (Zeilen 3-11) in die `test-script.sh` Datei ein. Stelle sicher, dass die Skript-Datei ausführbar ist (z.B. `chmod +x test-script.sh`).
-3. **Java-Tests (optional):** Wenn du Java-Tests mit WebDriver ausführst, füge den optionalen Schritt `Run tests` nach dem Skript-Schritt ein.
-
-Mit diesen Änderungen sollte dein Workflow funktionieren und die WebDriver-Befehle in der separaten Skript-Datei ausgeführt werden.
- 
