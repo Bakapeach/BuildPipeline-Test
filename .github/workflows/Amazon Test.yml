@@ -1,12 +1,14 @@
+name: WebDriver Test
+
 on:
   push:
     branches: [ main ]
 
 jobs:
-  tests:
-  runs-on: ubuntu-latest
+  test:
+    runs-on: ubuntu-latest
     steps:
-         - name: test002
+     - name: test002
     commands:
       - command: open
         target: https://search.brave.com/search?q=amazon
@@ -26,16 +28,6 @@ jobs:
         value: ${KEY_ENTER}
       - command: executeScript
         target: window.scrollTo(0, 200)
-
-webdriver:
-  browser: chrome
-  capabilities:
-    chromeOptions:
-      args:
-        - headless
-        - disable-gpu
-        - window-size=945,1012
-
       - uses: actions/checkout@v3
       - name: Set up JDK 17
         uses: actions/setup-java@v3
@@ -43,4 +35,23 @@ webdriver:
           java-version: '17'
           distribution: 'temurin'   
 
+      - name: Cache Maven packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+      - name:   
+ Set up Chrome
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Install Chrome Driver
+        run: npm install -g chromedriver
+      - name: Run tests
+        run: |
+          # Hier fügen Sie Ihren Java-Code mit WebDriver-Aufrufen ein
+          # Beispiel:
+          mvn test -Dtest=Test002
  
