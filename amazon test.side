@@ -1,0 +1,123 @@
+{
+  "id": "3ab911ef-9829-48ab-92a8-c1c5c06fa28d",
+  "version": "2.0",
+  "name": "GoogleTest",
+  "url": "https://search.brave.com/search?q=amazon",
+  "tests": [{
+    "id": "6105a7e2-5a97-4174-8f49-a22aa25a3b50",
+    "name": "test-002",
+    "commands": [{
+      "id": "db75918c-0130-478f-b6e1-6c9a15b6efb2",
+      "comment": "",
+      "command": "open",
+      "target": "https://search.brave.com/search?q=amazon",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "fb6831a5-9a09-431b-a057-eaaac8e67cde",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "945x1012",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "9bcbb2b5-b118-4d46-b1d0-e02473c4fbbe",
+      "comment": "",
+      "command": "click",
+      "target": "css=.snippet:nth-child(1) > .h .title",
+      "targets": [
+        ["css=.snippet:nth-child(1) > .h .title", "css:finder"],
+        ["xpath=//div[@id='results']/div/a/div/div[2]", "xpath:idRelative"],
+        ["xpath=//a/div/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "19fb8e5f-cd93-43d1-81c1-6b18a50a1e53",
+      "comment": "",
+      "command": "click",
+      "target": "id=twotabsearchtextbox",
+      "targets": [
+        ["id=twotabsearchtextbox", "id"],
+        ["name=field-keywords", "name"],
+        ["css=#twotabsearchtextbox", "css:finder"],
+        ["xpath=//input[@id='twotabsearchtextbox']", "xpath:attributes"],
+        ["xpath=//form[@id='nav-search-bar-form']/div[3]/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7ac9858f-cb3b-4f6f-8161-6b967e2bbbcd",
+      "comment": "",
+      "command": "runScript",
+      "target": "window.scrollTo(0,0)",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ca0601bd-98da-4852-927a-3dc2fc83dfe4",
+      "comment": "",
+      "command": "runScript",
+      "target": "window.scrollTo(0,0)",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "57cd9303-3912-4865-95b9-a87e9df7e3bb",
+      "comment": "",
+      "command": "runScript",
+      "target": "window.scrollTo(0,0)",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "41690686-63d6-4f32-ad4d-8235e0d173aa",
+      "comment": "",
+      "command": "runScript",
+      "target": "window.scrollTo(0,0)",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "749008d7-ddf9-4c15-b7fc-baec94d7ee0b",
+      "comment": "",
+      "command": "type",
+      "target": "id=twotabsearchtextbox",
+      "targets": [
+        ["id=twotabsearchtextbox", "id"],
+        ["name=field-keywords", "name"],
+        ["css=#twotabsearchtextbox", "css:finder"],
+        ["xpath=//input[@id='twotabsearchtextbox']", "xpath:attributes"],
+        ["xpath=//form[@id='nav-search-bar-form']/div[3]/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/input", "xpath:position"]
+      ],
+      "value": "handyschutzhülle google pixel 4"
+    }, {
+      "id": "c841fe1f-b89c-43d6-8b1c-bb47a465d0c0",
+      "comment": "",
+      "command": "sendKeys",
+      "target": "id=twotabsearchtextbox",
+      "targets": [
+        ["id=twotabsearchtextbox", "id"],
+        ["name=field-keywords", "name"],
+        ["css=#twotabsearchtextbox", "css:finder"],
+        ["xpath=//input[@id='twotabsearchtextbox']", "xpath:attributes"],
+        ["xpath=//form[@id='nav-search-bar-form']/div[3]/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/input", "xpath:position"]
+      ],
+      "value": "${KEY_ENTER}"
+    }, {
+      "id": "783f90ba-0934-4306-b795-704c2aa4ea10",
+      "comment": "",
+      "command": "runScript",
+      "target": "window.scrollTo(0,200)",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "796c48d1-ece7-4968-b2e9-b0e71db7895a",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["https://www.google.de/", "https://search.brave.com/search?q=amazon"],
+  "plugins": []
+}
