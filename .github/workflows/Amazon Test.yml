@@ -27,15 +27,6 @@ jobs:
       - name: Install ChromeDriver
         run: npm install -g chromedriver
 
-      - name: Verify file existence and structure
-        run: |
-          echo "Current directory:"
-          pwd
-          echo "List files in directory:"
-          ls -la
-          echo "List files in tests directory:"
-          ls -la tests
-
       - name: Run Selenium IDE Tests
         run: |
           selenium-side-runner -c "browserName=chrome" tests/AmazonTest.side  # Stelle sicher, dass der Pfad korrekt ist
