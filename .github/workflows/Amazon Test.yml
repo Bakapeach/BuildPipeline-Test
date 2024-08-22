@@ -1,0 +1,31 @@
+tests:
+  - name: test002
+    commands:
+      - command: open
+        target: https://search.brave.com/search?q=amazon
+      - command: setWindowSize
+        target: 945x1012
+      - command: click
+        target: css=.snippet:nth-child(1) > .h .title
+      - command: click
+        target: id=twotabsearchtextbox
+      - command: executeScript
+        target: window.scrollTo(0, 0)
+      - command: sendKeys
+        target: id=twotabsearchtextbox
+        value: handyschutzhülle google pixel 4
+      - command: sendKeys
+        target: id=twotabsearchtextbox
+        value: ${KEY_ENTER}
+      - command: executeScript
+        target: window.scrollTo(0, 200)
+
+webdriver:
+  browser: chrome
+  capabilities:
+    chromeOptions:
+      args:
+        - headless
+        - disable-gpu
+        - window-size=945,1012
+
