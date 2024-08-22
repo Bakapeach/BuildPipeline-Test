@@ -28,8 +28,12 @@ jobs:
       - name: Add ChromeDriver to PATH
         run: |
           echo "Adding ChromeDriver to PATH"
+          if [ -L /usr/bin/chromedriver ]; then
+          sudo rm /usr/bin/chromedriver
+          fi
           sudo ln -s /usr/local/bin/chromedriver /usr/bin/chromedriver
           export PATH=$PATH:/usr/bin/chromedriver
+
           
       - name: Run Selenium IDE Tests
         run: |
