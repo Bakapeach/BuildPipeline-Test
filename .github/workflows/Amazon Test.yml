@@ -29,7 +29,7 @@ jobs:
 
       - name: Run Selenium IDE Tests
         run: |
-          selenium-side-runner -c "browserName=chrome" tests/AmazonTest.side  # Stelle sicher, dass der Pfad korrekt ist
+          selenium-side-runner -c "browserName=chrome" amazontest.side
 
       - name: Set up JDK 17
         uses: actions/setup-java@v3
