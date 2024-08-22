@@ -16,9 +16,16 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Install dependencies
+      - name: Install selenium-side-runner
+        run: npm install -g selenium-side-runner
+
+      - name: Install Chrome
         run: |
-          npm install -g selenium-side-runner
+          sudo apt-get update
+          sudo apt-get install -y chromium-browser
+
+      - name: Install ChromeDriver
+        run: npm install -g chromedriver
 
       - name: Run Selenium IDE Tests
         run: |
@@ -33,15 +40,13 @@ jobs:
       - name: Cache Maven packages
         uses: actions/cache@v3
         with:
-          path: ~/.m2
+          path: C:/Users/rlangner/OneDrive - Informatikwerk GmbH/Testing/amazon test.side
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      - name: Install Chrome Driver
-        run: npm install -g chromedriver
-
       - name: Run Java Tests
         run: mvn test -Dtest=Test002
+
 
 
