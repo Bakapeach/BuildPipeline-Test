@@ -24,13 +24,8 @@ jobs:
           wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
           sudo apt install ./google-chrome-stable_current_amd64.deb
 
-      - name: Install specific version of ChromeDriver
-        run: |
-          CHROMEDRIVER_VERSION="115.0.5790.171"  # Beispielversion, passt ggf. an
-          wget https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip
-          unzip chromedriver_linux64.zip
-          sudo mv chromedriver /usr/local/bin/chromedriver
-          sudo chmod +x /usr/local/bin/chromedriver
+      - name: Install ChromeDriver
+        run: npm install -g chromedriver
 
       - name: Verify Chrome installation
         run: which google-chrome
