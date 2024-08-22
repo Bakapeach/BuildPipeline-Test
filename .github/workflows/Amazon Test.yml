@@ -1,4 +1,4 @@
-name: WebDriver Test
+name: Amazon Test
 
 on:
   push:
@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Run WebDriver Test
+      - name: Run Amazon Test
         run: |
           sh test-script.sh
 
@@ -36,7 +36,7 @@ jobs:
       - name: Install Chrome Driver
         run: npm install -g chromedriver
 
-      - name: Run WebDriver Test  # Neuer Schritt für den Test
+      - name: Run Amazon Test  # Neuer Schritt für den Test
         uses: ./test-script.sh  # Ersetzt den Test-Schritt mit einer separaten Shell-Skript-Datei
 
       - name: Run tests  # Optionaler Schritt für Java-Tests
