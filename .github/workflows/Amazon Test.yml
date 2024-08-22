@@ -8,32 +8,13 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-     - name: test002
-    commands:
-      - command: open
-        target: https://search.brave.com/search?q=amazon
-      - command: setWindowSize
-        target: 945x1012
-      - command: click
-        target: css=.snippet:nth-child(1) > .h .title
-      - command: click
-        target: id=twotabsearchtextbox
-      - command: executeScript
-        target: window.scrollTo(0, 0)
-      - command: sendKeys
-        target: id=twotabsearchtextbox
-        value: handyschutzhülle google pixel 4
-      - command: sendKeys
-        target: id=twotabsearchtextbox
-        value: ${KEY_ENTER}
-      - command: executeScript
-        target: window.scrollTo(0, 200)
       - uses: actions/checkout@v3
+
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
           java-version: '17'
-          distribution: 'temurin'   
+          distribution: 'temurin'
 
       - name: Cache Maven packages
         uses: actions/cache@v3
@@ -42,16 +23,33 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
-      - name:   
- Set up Chrome
+
+      - name: Set up Chrome
         uses: actions/setup-node@v3
         with:
           node-version: '16'
+
       - name: Install Chrome Driver
         run: npm install -g chromedriver
-      - name: Run tests
-        run: |
-          # Hier fügen Sie Ihren Java-Code mit WebDriver-Aufrufen ein
-          # Beispiel:
-          mvn test -Dtest=Test002
+
+      - name: Run WebDriver Test  # Neuer Schritt für den Test
+        uses: ./test-script.sh  # Ersetzt den Test-Schritt mit einer separaten Shell-Skript-Datei
+
+      - name: Run tests  # Optionaler Schritt für Java-Tests
+        run: mvn test -Dtest=Test002  # Füge diesen Schritt ein, wenn du Java-Tests ausführst
+
+**Änderungen:**
+
+* **Schritt für Test entfernt:** Der ursprüngliche `test002`-Schritt mit den WebDriver-Befehlen wurde entfernt.
+* **Neuer Schritt: Run WebDriver Test:** Ein neuer Schritt namens "Run WebDriver Test" wurde hinzugefügt.
+* **Separate Skript-Datei:** Dieser Schritt verwendet die Aktion `uses`, um eine separate Shell-Skript-Datei namens `test-script.sh` aufzurufen.
+* **Java-Tests (optional):** Ein optionaler Schritt namens "Run tests" wurde hinzugefügt, um Java-Tests mit `mvn test` auszuführen. Füge diesen Schritt ein, wenn du Java-Tests mit WebDriver hast.
+
+**Weiteres Vorgehen:**
+
+1. **Erstelle die Shell-Skript-Datei:** Erstelle eine neue Datei namens `test-script.sh` im `.github/workflows` Verzeichnis.
+2. **Füge WebDriver-Befehle in die Skript-Datei ein:** Füge die Befehle aus deinem ursprünglichen `test002`-Schritt (Zeilen 3-11) in die `test-script.sh` Datei ein. Stelle sicher, dass die Skript-Datei ausführbar ist (z.B. `chmod +x test-script.sh`).
+3. **Java-Tests (optional):** Wenn du Java-Tests mit WebDriver ausführst, füge den optionalen Schritt `Run tests` nach dem Skript-Schritt ein.
+
+Mit diesen Änderungen sollte dein Workflow funktionieren und die WebDriver-Befehle in der separaten Skript-Datei ausgeführt werden.
  
