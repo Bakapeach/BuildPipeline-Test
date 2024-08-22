@@ -32,7 +32,7 @@ jobs:
 
       - name: Run Selenium IDE Tests
         env:
-          CHROME_BIN: /usr/bin/google-chrome
+          CHROME_BIN: D:/develop/chromeDriver
         run: |
          
           export PATH=$PATH:/usr/local/bin/chromedriver
