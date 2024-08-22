@@ -24,17 +24,21 @@ jobs:
           wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
           sudo apt install ./google-chrome-stable_current_amd64.deb
 
-      - name: Install ChromeDriver
+      - name: Install specific version of ChromeDriver
         run: |
-                CHROMEDRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE)
-                wget https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip
-                unzip chromedriver_linux64.zip
-                sudo mv chromedriver /usr/local/bin/chromedriver
-                sudo chmod +x /usr/local/bin/chromedriver
+          CHROMEDRIVER_VERSION="115.0.5790.171"  # Beispielversion, passt ggf. an
+          wget https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip
+          unzip chromedriver_linux64.zip
+          sudo mv chromedriver /usr/local/bin/chromedriver
+          sudo chmod +x /usr/local/bin/chromedriver
+
+      - name: Verify Chrome installation
+        run: which google-chrome
 
       - name: Run Selenium IDE Tests
         run: |
-          selenium-side-runner -c "browserName=chrome" amazontest.side
+          selenium-side-runner -c "browserName=chrome, chromeOptions: {args: ['--headless', '--no-sandbox', '--disable-dev-shm-usage']}" amazontest.side
+
 
       - name: Set up JDK 17
         uses: actions/setup-java@v3
